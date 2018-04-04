@@ -1,0 +1,33 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>To do list</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div >
+        <form class = "form-group" action="#" method="post" enctype="text/html">
+            Zadanie
+            <input class="form-control mb-2 mr-sm-2 mb-sm-0"  type="text" name="description">
+            <input class="form-control mb-2 mr-sm-2 mb-sm-0"  type="date" name="date">
+            <input class="btn btn-primary" type="submit" value="Dodaj">
+        </form>
+
+        
+
+        
+        <div th:if=${model} th:each="task : ${model}" >
+            <p th:text="${task.description} + ' ' + ${task?.finishDate}"></p>
+        </div>
+
+
+       
+    </div>
+</body>
+
+</html>

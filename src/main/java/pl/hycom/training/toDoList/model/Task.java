@@ -11,13 +11,13 @@ import java.util.Date;
 public class Task {
     @Id
     @GeneratedValue
-    private int id;
+    private Long id;
     @Column(name = "description")
     private String description;
     @Column(name = "date")
-    private Date finishDate;
+    private String finishDate;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -25,11 +25,11 @@ public class Task {
         return description;
     }
 
-    public Date getFinishDate() {
+    public String getFinishDate() {
         return finishDate;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -37,7 +37,7 @@ public class Task {
         this.description = description;
     }
 
-    public void setFinishDate(Date finishDate) {
+    public void setFinishDate(String finishDate) {
         this.finishDate = finishDate;
     }
 }
