@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import org.springframework.web.servlet.ModelAndView;
-import pl.hycom.training.toDoList.model.Dao.HibernateDao;
+
 import pl.hycom.training.toDoList.model.Task;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,6 +44,14 @@ public class ToDoListController {
         taskRepository.save(task);
        return "redirect:/";
 
+    }
+
+    @RequestMapping(value = "/delete", method = POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String deleteTask(HttpServletRequest request){
+    
+
+        taskRepository.delete(taskRepository.getOne(Long.valueOf(request.getParameter("id"))));
+        return "redirect:/";
     }
 
 

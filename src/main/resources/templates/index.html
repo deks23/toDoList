@@ -10,23 +10,43 @@
 </head>
 
 <body>
-    <div >
-        <form class = "form-group" action="#" method="post" enctype="text/html">
-            Zadanie
-            <input class="form-control mb-2 mr-sm-2 mb-sm-0"  type="text" name="description">
-            <input class="form-control mb-2 mr-sm-2 mb-sm-0"  type="date" name="date">
-            <input class="btn btn-primary" type="submit" value="Dodaj">
-        </form>
 
-        
+    <div class="container">
 
-        
-        <div th:if=${model} th:each="task : ${model}" >
-            <p th:text="${task.description} + ' ' + ${task?.finishDate}"></p>
+        <div>
+            <form class="form-group" action="#" method="post" enctype="text/html">
+                Zadanie
+                <input class="form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="description">
+                <input class="form-control mb-2 mr-sm-2 mb-sm-0" type="date" name="date">
+                <input class="btn btn-primary" type="submit" value="Dodaj">
+            </form>
         </div>
 
 
-       
+        <div class="tasksContainer span6">
+            <table class="table table-striped customTable">
+                <thead>
+                    <tr>
+                        <th scope="col1"> Zadanie</th>
+                        <th scope="col2"> Data końcowa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if=${model} th:each="task : ${model}">
+                        <th th:text="${task.description} "></th>
+                        <th th:text="${task?.finishDate}"></th>
+                        <th>
+                            <form action="/delete" method="POST" enctype="text/html">
+                                <input type="hidden" th:value="${task.id}" name="id">
+                                <input class="btn btn-danger" type="submit" value="Usun">
+                            </form>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+            </table>
+        </div>
+
     </div>
 </body>
 

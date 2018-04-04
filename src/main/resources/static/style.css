@@ -1,15 +1,13 @@
-body {
-    background-color: red;
-}
+
 
 .container{
     display: flex;
     justify-content: center;
+    flex-direction: column;
     
 }
 
-.tasksContainer{
-    background-color: red;
+.tasksContainer{ 
     display: flex;
     align-items: center;
 }
