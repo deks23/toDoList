@@ -48,7 +48,7 @@ public class ToDoListController {
 
     @RequestMapping(value = "/delete", method = POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String deleteTask(HttpServletRequest request){
-    
+
 
         taskRepository.delete(taskRepository.getOne(Long.valueOf(request.getParameter("id"))));
         return "redirect:/";
