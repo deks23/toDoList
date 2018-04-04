@@ -1,8 +1,9 @@
 
 
-.container{
+.customContainer{
     display: flex;
     justify-content: center;
+    align-content: center;
     flex-direction: column;
     
 }
@@ -10,4 +11,8 @@
 .tasksContainer{ 
     display: flex;
     align-items: center;
+}
+
+.styl{
+    margin: 10px;
 }
