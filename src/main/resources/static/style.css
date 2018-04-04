@@ -1,0 +1,15 @@
+body {
+    background-color: red;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.tasksContainer{
+    background-color: red;
+    display: flex;
+    align-items: center;
+}
