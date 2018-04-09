@@ -26,9 +26,8 @@ public class ToDoListService {
     public void  addTask(String description, String date){
         Task task = new Task();
         task.setDescription(description);
-        LocalDate dateFormated = LocalDate.parse(date);
-        if (date != "")
-        task.setFinishDate(LocalDate.parse(date));
+        if (date!="")
+            task.setFinishDate(LocalDate.parse(date));
         else
             task.setFinishDate(LocalDate.now());
         taskRepository.save(task);
