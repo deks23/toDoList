@@ -1,6 +1,8 @@
 package pl.hycom.training.toDoList.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -14,8 +16,18 @@ public class Task {
     private Long id;
     @Column(name = "description")
     private String description;
-    @Column(name = "date")
-    private String finishDate;
+
+
+    @Column (name = "finishDate")
+    private LocalDate finishDate;
+
+    public LocalDate getFinishDate() {
+        return finishDate;
+    }
+
+    public void setFinishDate(LocalDate dateField) {
+        this.finishDate = dateField;
+    }
 
     public Long getId() {
         return id;
@@ -25,9 +37,6 @@ public class Task {
         return description;
     }
 
-    public String getFinishDate() {
-        return finishDate;
-    }
 
     public void setId(Long id) {
         this.id = id;
@@ -37,7 +46,5 @@ public class Task {
         this.description = description;
     }
 
-    public void setFinishDate(String finishDate) {
-        this.finishDate = finishDate;
-    }
+
 }

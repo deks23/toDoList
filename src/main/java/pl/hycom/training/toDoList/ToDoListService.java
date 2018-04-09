@@ -1,13 +1,15 @@
 package pl.hycom.training.toDoList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 import pl.hycom.training.toDoList.model.Task;
 import pl.hycom.training.toDoList.repository.TaskRepository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 /**
  * Created by hycom on 09.04.18.
@@ -24,10 +26,11 @@ public class ToDoListService {
     public void  addTask(String description, String date){
         Task task = new Task();
         task.setDescription(description);
+        LocalDate dateFormated = LocalDate.parse(date);
         if (date != "")
-            task.setFinishDate(date.substring(0, 10));
+        task.setFinishDate(LocalDate.parse(date));
         else
-            task.setFinishDate("");
+            task.setFinishDate(LocalDate.now());
         taskRepository.save(task);
     }
 
