@@ -11,9 +11,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import org.springframework.web.servlet.ModelAndView;
 
-import pl.hycom.training.toDoList.ToDoListService;
-import pl.hycom.training.toDoList.model.Task;
-import pl.hycom.training.toDoList.repository.TaskRepository;
+import pl.hycom.training.toDoList.service.ToDoListService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -49,11 +47,11 @@ public class ToDoListController {
     }
 
 
-   /* @RequestMapping(value = "/template", method = GET)
+    @RequestMapping(value = "/login", method = GET)
     public ModelAndView template() {
             String str = "dane do frontu";
             return new ModelAndView("/template", "dane", str);
 
-    }*/
+    }
 
 }
