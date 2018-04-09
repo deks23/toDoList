@@ -11,6 +11,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import pl.hycom.training.toDoList.ToDoListService;
 import pl.hycom.training.toDoList.model.Task;
 import pl.hycom.training.toDoList.repository.TaskRepository;
 
@@ -23,44 +24,36 @@ import javax.servlet.http.HttpServletRequest;
 public class ToDoListController {
 
     @Autowired
-    TaskRepository taskRepository;
+    ToDoListService toDoListService;
 
     @RequestMapping(value = "/", method = GET)
     public ModelAndView index() {
         try{
-            return new ModelAndView("/index", "model", taskRepository.findAll());
+            return new ModelAndView("/index", "model", toDoListService.getAllTasks());
         }catch (Exception e){
             return new ModelAndView("/index");
         }
-
     }
 
     @RequestMapping(value = "/", method = POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String addTask(HttpServletRequest request) {
-            Task task = new Task();
-            task.setDescription(request.getParameter("description"));
-            if (request.getParameter("date") != "")
-                task.setFinishDate(request.getParameter("date").substring(0, 10));
-            else
-                task.setFinishDate("");
-        taskRepository.save(task);
+        toDoListService.addTask(request.getParameter("description"), request.getParameter("date"));
         return "redirect:/";
 
     }
 
     @RequestMapping(value = "/delete", method = POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String deleteTask(HttpServletRequest request) {
-        taskRepository.delete(taskRepository.getOne(Long.valueOf(request.getParameter("id"))));
+        toDoListService.deleteTask(Long.valueOf(request.getParameter("id")));
         return "redirect:/";
     }
 
 
-    @RequestMapping(value = "/template", method = GET)
+   /* @RequestMapping(value = "/template", method = GET)
     public ModelAndView template() {
             String str = "dane do frontu";
             return new ModelAndView("/template", "dane", str);
 
-
-    }
+    }*/
 
 }
