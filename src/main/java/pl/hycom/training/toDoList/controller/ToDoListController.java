@@ -49,8 +49,7 @@ public class ToDoListController {
 
     @RequestMapping(value = "/login", method = GET)
     public ModelAndView template() {
-            String str = "dane do frontu";
-            return new ModelAndView("/template", "dane", str);
+            return new ModelAndView("/login");
 
     }
 
