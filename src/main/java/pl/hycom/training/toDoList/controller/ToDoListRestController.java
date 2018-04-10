@@ -24,16 +24,7 @@ public class ToDoListRestController {
 
     @Autowired
     ToDoListService toDoListService;
-
-    @RequestMapping(value="/restGet", method = GET)
-    public String test(){
-        return "TEST";
-    }
-
-    @RequestMapping(value="/restGet", params={"par"}, method = POST)
-    public String test2(@RequestParam String par){
-        return par;
-    }
+    
 
     @RequestMapping(value="/restGetTasks", method = GET)
     public ResponseEntity getTasks(){
@@ -43,5 +34,10 @@ public class ToDoListRestController {
     @RequestMapping(value="/restAddTask", params = {"description", "finishDate"}, method = POST)
     public void addTask(@RequestParam String description, @RequestParam String finishDate){
         toDoListService.addTask(description, finishDate);
+    }
+
+    @RequestMapping(value="restDeleteTask", params ={"id"}, method = POST)
+    public void removeTask(@RequestParam String id){
+        toDoListService.deleteTask(Long.valueOf(id));
     }
 }
