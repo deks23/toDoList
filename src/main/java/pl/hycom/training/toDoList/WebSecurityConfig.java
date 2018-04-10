@@ -1,4 +1,4 @@
-package pl.hycom.training.toDoList.service;
+package pl.hycom.training.toDoList;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,9 +16,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers( "/login").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/").authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")

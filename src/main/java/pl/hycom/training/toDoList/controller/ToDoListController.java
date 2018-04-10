@@ -33,7 +33,7 @@ public class ToDoListController {
         }
     }
 
-    @RequestMapping(value = "/", method = POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @RequestMapping(value = "/add", method = POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String addTask(HttpServletRequest request) {
         toDoListService.addTask(request.getParameter("description"), request.getParameter("date"));
         return "redirect:/";
