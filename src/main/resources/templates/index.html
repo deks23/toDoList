@@ -14,7 +14,9 @@
         <div class="container">
                 <div class="jumbotron">
                   <h1>Lista zadań</h1>
-                  
+                    <form th:action="@{/logout}" method="post">
+                        <input class="btn btn-danger"  type="submit" value="Wyloguj się"/>
+                    </form>
                 </div>
               </div>
 

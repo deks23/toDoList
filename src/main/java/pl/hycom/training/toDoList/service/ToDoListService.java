@@ -1,4 +1,4 @@
-package pl.hycom.training.toDoList;
+package pl.hycom.training.toDoList.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
