@@ -1,6 +1,7 @@
 package pl.hycom.training.toDoList.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -16,7 +17,7 @@ public class User {
     private String password;
     private String passwordConfirm;
     private Set<Role> roles;
-
+    /*private List <Task> task = new ArrayList<>();*/
 
     @Id
     @GeneratedValue
@@ -62,4 +63,14 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+/*    @OneToMany
+    @JoinTable(name = "task")
+    public List<Task> getTask() {
+        return task;
+    }
+
+    public void setTask(List<Task> task) {
+        this.task = task;
+    }*/
 }

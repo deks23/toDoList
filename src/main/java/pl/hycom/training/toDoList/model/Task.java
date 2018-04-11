@@ -18,10 +18,12 @@ public class Task {
     @Column(name = "description")
     private String description;
 
-
-
     @Column (name = "finishDate")
     private LocalDate finishDate;
+
+
+    @ManyToOne
+    private User user;
 
     public LocalDate getFinishDate() {
         return finishDate;
@@ -48,5 +50,11 @@ public class Task {
         this.description = description;
     }
 
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
