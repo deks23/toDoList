@@ -4,14 +4,24 @@ package pl.hycom.training.toDoList.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+
+import pl.hycom.training.toDoList.UserValidator;
+import pl.hycom.training.toDoList.model.User;
+import pl.hycom.training.toDoList.service.SecurityService;
 import pl.hycom.training.toDoList.service.ToDoListService;
+import pl.hycom.training.toDoList.service.UserService;
+
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,6 +33,16 @@ public class ToDoListController {
 
     @Autowired
     ToDoListService toDoListService;
+
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private SecurityService securityService;
+
+    @Autowired
+    private UserValidator userValidator;
 
     @RequestMapping(value = "/", method = GET)
     public ModelAndView index() {
@@ -47,9 +67,41 @@ public class ToDoListController {
     }
 
 
-    @RequestMapping(value = "/login", method = GET)
-    public ModelAndView template() {
-            return new ModelAndView("/login");
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
+        userValidator.validate(userForm, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "redirect:/";
+        }
+
+        userService.save(userForm);
+
+        //securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
+
+        return "redirect:/login";
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String registerForm(){
+        return "/register";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(Model model, String error, String logout) {
+        if (error != null)
+            model.addAttribute("error", "Your username and password is invalid.");
+
+        if (logout != null)
+            model.addAttribute("message", "You have been logged out successfully.");
+
+        return "login";
+    }
+
+    @RequestMapping(value = { "/welcome"}, method = RequestMethod.GET)
+    public String welcome(Model model) {
+        return "welcome";
 
     }
 
