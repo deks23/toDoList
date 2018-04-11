@@ -73,7 +73,7 @@ public class ToDoListController {
         userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            return "redirect:/";
+            return "redirect:/register";
         }
 
         userService.save(userForm);
@@ -84,7 +84,9 @@ public class ToDoListController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String registerForm(){
+    public String registerForm(Model model, String error){
+        if (error!=null)
+            model.addAttribute("error", "Wrong data");
         return "/register";
     }
 

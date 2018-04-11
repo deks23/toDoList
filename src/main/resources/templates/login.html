@@ -3,18 +3,27 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Spring Security Example </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/ToDoStyle.css">
+
 </head>
-<body>
+<body class ="loginBody">
 <div th:if="${param.error}">
     Invalid username and password.
 </div>
 <div th:if="${param.logout}">
     You have been logged out.
 </div>
-<form th:action="@{/login}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
+<div class = "loginDiv">
+    <form class="formDiv" th:action="@{/login}" method="post">
+        <div class= "formField"><label> User Name : <input class=" styl form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="username"/>
+        </label></div>
+        <div class= "formField"><label> Password: <input class=" styl form-control mb-2 mr-sm-2 mb-sm-0" type="password" name="password"/>
+        </label></div>
+        <div class= "formField"><input class="styl btn btn-primary" type="submit" value="Sign In"/></div>
+    </form>
+
+    <a th:href="@{register}" >Zarejestruj się</a>
+</div>
 </body>
 </html>

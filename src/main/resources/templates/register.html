@@ -3,14 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>register</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/ToDoStyle.css">
 </head>
-<body>
+<body class = "loginBody">
 
-<form th:action="@{/register}" method="post">
-    <div>Username: <input  type = "text", name = "username"></div>
-    <div>Password: <input  type = "text", name = "password"></div>
-    <div>Confirm password: <input  type = "text", name = "passwordConfirm"></div>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
+<div class = "loginDiv">
+    <div th:if="${param.error}">
+        Invalid username and password.
+    </div>
+    <form th:action="@{/register}" method="post">
+        <div>Username: <input class=" styl form-control mb-2 mr-sm-2 mb-sm-0"  type = "text", name = "username"></div>
+        <div>Password: <input class=" styl form-control mb-2 mr-sm-2 mb-sm-0"  type = "text", name = "password"></div>
+        <div>Confirm password: <input  class=" styl form-control mb-2 mr-sm-2 mb-sm-0" type = "text", name = "passwordConfirm"></div>
+        <div><input class="styl btn btn-primary" type="submit" value="Sign In"/></div>
+    </form>
+</div>
 </body>
 </html>
