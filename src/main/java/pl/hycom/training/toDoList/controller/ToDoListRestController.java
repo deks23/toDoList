@@ -20,18 +20,24 @@ public class ToDoListRestController {
     ToDoListService toDoListService;
 
 
-    @RequestMapping(value="/restGetTasks", method = GET)
+    @RequestMapping(value="/rest/GetTasks", method = GET)
     public ResponseEntity getTasks(){
         return ResponseEntity.ok(toDoListService.getAllTasks());
     }
 
-    @RequestMapping(value="/restAddTask", params = {"description", "finishDate"}, method = POST)
+    @RequestMapping(value="/rest/AddTask", params = {"description", "finishDate"}, method = POST)
     public void addTask(@RequestParam String description, @RequestParam String finishDate){
         toDoListService.addTask(description, finishDate);
     }
 
-    @RequestMapping(value="restDeleteTask", params ={"id"}, method = POST)
+    @RequestMapping(value="/rest/DeleteTask", params ={"id"}, method = POST)
     public void removeTask(@RequestParam String id){
         toDoListService.deleteTask(Long.valueOf(id));
+    }
+
+    @RequestMapping(value="/rest/login", params={"login", "password"}, method = POST)
+    public ResponseEntity login (@RequestParam String login, @RequestParam String password){
+        
+        return ResponseEntity.ok("qwe");
     }
 }
