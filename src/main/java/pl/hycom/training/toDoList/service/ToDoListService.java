@@ -35,7 +35,6 @@ public class ToDoListService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Task task = new Task();
         task.setDescription(description);
-        Object o = auth.getAuthorities();
         org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) auth.getPrincipal();
         task.setUser(userRepository.findByUsername(user.getUsername()));
         auth.getPrincipal();

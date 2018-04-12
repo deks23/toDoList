@@ -1,10 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>admin</title>
+    <link rel="stylesheet" type="text/css" href="css/ToDoStyle.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body>
 
+<div class="container">
+    <div class="jumbotron">
+        <h1>Lista zadań - panel admina</h1>
+        <form th:action="@{/logout}" method="post">
+            <input class="btn btn-danger" type="submit" value="Wyloguj się"/>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div>
+        <form class="form-group " action="/admin/addTask" method="post" enctype="text/html">
+            <h2>Zadanie</h2>
+            <input class=" styl form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="description">
+            <h2>Data wykonania</h2>
+            <input class="styl form-control mb-2 mr-sm-2 mb-sm-0" type="date" name="date">
+            <div th:if=${model.users}>
+                <select  name="user">
+                    <option th:text="${user.username}" th:each="user : ${model.users}" th:value="${user}">Volvo</option>
+                </select>
+            </div>
+            <input class="styl btn btn-primary" type="submit" value="Dodaj">
+        </form>
+    </div>
+
+    <div class="tasksContainer span6">
+        <table class="table table-striped customTable">
+            <thead>
+            <tr>
+                <th scope="col1"> Zadanie</th>
+                <th scope="col2"> Data końcowa</th>
+                <th scope="col3"> Użytkownik</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if=${model.tasks} th:each="task : ${model.tasks}">
+                <th th:text="${task.description} "></th>
+                <th th:text="${task?.finishDate}"></th>
+                <th th:text="${task.user.username}"></th>
+                <th>
+                    <form action="/admin/deleteTask" method="POST" enctype="text/html">
+                        <input type="hidden" th:value="${task.id}" name="id">
+                        <input class="btn btn-danger" type="submit" value="Usun">
+                    </form>
+                </th>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
 </body>
 </html>
