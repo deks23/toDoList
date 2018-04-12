@@ -51,4 +51,9 @@ public class ToDoListService {
     public void deleteTask(Long id){
         taskRepository.delete(taskRepository.getOne(id));
     }
+    public List<Task> getUserTasks(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) auth.getPrincipal();
+        return taskRepository.findByUser(userRepository.findByUsername(user.getUsername()));
+    }
 }

@@ -2,6 +2,7 @@ package pl.hycom.training.toDoList.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import pl.hycom.training.toDoList.model.Task;
+import pl.hycom.training.toDoList.model.User;
 
 import java.util.List;
 
@@ -10,5 +11,6 @@ import java.util.List;
  */
  public interface TaskRepository extends JpaRepository <Task, Long> {
     List<Task> findAll();
+    List<Task> findByUser(User user);
 
 }

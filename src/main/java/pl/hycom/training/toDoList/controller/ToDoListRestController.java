@@ -37,7 +37,7 @@ public class ToDoListRestController {
 
     @RequestMapping(value="/rest/login", params={"login", "password"}, method = POST)
     public ResponseEntity login (@RequestParam String login, @RequestParam String password){
-        
-        return ResponseEntity.ok("qwe");
+
+        return ResponseEntity.ok("TODO");
     }
 }

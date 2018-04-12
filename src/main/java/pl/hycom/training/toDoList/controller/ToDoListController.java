@@ -3,8 +3,6 @@ package pl.hycom.training.toDoList.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -49,7 +47,7 @@ public class ToDoListController {
     @RequestMapping(value = "/", method = GET)
     public ModelAndView index() {
         try{
-            return new ModelAndView("/index", "model", toDoListService.getAllTasks());
+            return new ModelAndView("/index", "model", toDoListService.getUserTasks());
         }catch (Exception e){
             return new ModelAndView("/index");
         }
@@ -59,7 +57,6 @@ public class ToDoListController {
     public String addTask(HttpServletRequest request) {
         toDoListService.addTask(request.getParameter("description"), request.getParameter("date"));
         return "redirect:/";
-
     }
 
     @RequestMapping(value = "/delete", method = POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -68,8 +65,6 @@ public class ToDoListController {
         return "redirect:/";
     }
 
-
-
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
         userValidator.validate(userForm, bindingResult);
@@ -77,11 +72,8 @@ public class ToDoListController {
         if (bindingResult.hasErrors()) {
             return "redirect:/register";
         }
-
         userService.save(userForm);
-
         //securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
-
         return "redirect:/login";
     }
 
@@ -106,7 +98,6 @@ public class ToDoListController {
     @RequestMapping(value = { "/welcome"}, method = RequestMethod.GET)
     public String welcome(Model model) {
         return "welcome";
-
     }
 
 }
