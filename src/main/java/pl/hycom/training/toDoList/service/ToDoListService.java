@@ -27,17 +27,15 @@ public class ToDoListService {
     @Autowired
     UserRepository userRepository;
 
-
-
     public List<Task> getAllTasks(){
            return taskRepository.findAll();
     }
-
 
     public void  addTask(String description, String date){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Task task = new Task();
         task.setDescription(description);
+        Object o = auth.getAuthorities();
         org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) auth.getPrincipal();
         task.setUser(userRepository.findByUsername(user.getUsername()));
         auth.getPrincipal();
@@ -51,6 +49,7 @@ public class ToDoListService {
     public void deleteTask(Long id){
         taskRepository.delete(taskRepository.getOne(id));
     }
+
     public List<Task> getUserTasks(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) auth.getPrincipal();

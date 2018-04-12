@@ -31,6 +31,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers( "/register", "/rest/**").permitAll()
+                .antMatchers( "/").hasAuthority("USER")
+                .antMatchers("/admin").hasAuthority("ADMIN")
                 .antMatchers("/css/ToDoStyle.css").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -41,7 +43,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll();
     }
-
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

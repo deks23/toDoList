@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import pl.hycom.training.toDoList.UserValidator;
+import pl.hycom.training.toDoList.model.Role;
 import pl.hycom.training.toDoList.model.User;
 import pl.hycom.training.toDoList.service.SecurityService;
 import pl.hycom.training.toDoList.service.ToDoListService;
@@ -24,6 +25,8 @@ import pl.hycom.training.toDoList.service.UserService;
 
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by hycom on 03.04.18.
@@ -43,6 +46,7 @@ public class ToDoListController {
 
     @Autowired
     private UserValidator userValidator;
+
 
     @RequestMapping(value = "/", method = GET)
     public ModelAndView index() {
@@ -72,6 +76,10 @@ public class ToDoListController {
         if (bindingResult.hasErrors()) {
             return "redirect:/register";
         }
+        Set<Role> roles = new HashSet<>();
+
+        /*roles.add(userService.findRoleById(1));
+        userForm.setRoles(roles);*/
         userService.save(userForm);
         //securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
         return "redirect:/login";
@@ -95,9 +103,6 @@ public class ToDoListController {
         return "login";
     }
 
-    @RequestMapping(value = { "/welcome"}, method = RequestMethod.GET)
-    public String welcome(Model model) {
-        return "welcome";
-    }
+
 
 }
