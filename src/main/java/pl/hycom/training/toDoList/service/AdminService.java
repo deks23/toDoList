@@ -12,4 +12,5 @@ public interface AdminService {
     List<User> getAllUsers();
     List<Task> getAllTasks();
     void deleteTask(Long id);
+    void addTask(String username, String description, String finishDate);
 }

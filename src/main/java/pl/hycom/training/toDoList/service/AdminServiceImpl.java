@@ -7,6 +7,7 @@ import pl.hycom.training.toDoList.model.User;
 import pl.hycom.training.toDoList.repository.TaskRepository;
 import pl.hycom.training.toDoList.repository.UserRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -33,5 +34,16 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void deleteTask(Long id) {
         taskRepository.delete(taskRepository.getOne(id));
+    }
+
+    @Override
+    public void addTask(String username, String description, String finishDate) {
+        Task task = new Task();
+        task.setUser(userRepository.findByUsername(username));
+        task.setDescription(description);
+        if(finishDate!="")
+            task.setFinishDate(LocalDate.parse(finishDate));
+        else task.setFinishDate(LocalDate.now());
+        taskRepository.save(task);
     }
 }

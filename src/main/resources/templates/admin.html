@@ -22,12 +22,11 @@
             <h2>Zadanie</h2>
             <input class=" styl form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="description">
             <h2>Data wykonania</h2>
-            <input class="styl form-control mb-2 mr-sm-2 mb-sm-0" type="date" name="date">
-            <div th:if=${model.users}>
-                <select  name="user">
-                    <option th:text="${user.username}" th:each="user : ${model.users}" th:value="${user}">Volvo</option>
-                </select>
-            </div>
+            <input class="styl form-control mb-2 mr-sm-2 mb-sm-0" type="date" name="finishDate">
+            <select th:if=${model.users} class="form-control  mb-2 mr-sm-2 mb-sm-0" name="username">
+                <option class = "mb-2 mr-sm-2 mb-sm-0" th:text="${user.username}" th:each="user : ${model.users}" th:value="${user.username}">Volvo
+                </option>
+            </select>
             <input class="styl btn btn-primary" type="submit" value="Dodaj">
         </form>
     </div>
