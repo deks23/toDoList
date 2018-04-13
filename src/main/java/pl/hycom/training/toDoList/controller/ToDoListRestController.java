@@ -5,7 +5,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pl.hycom.training.toDoList.model.Task;
+import pl.hycom.training.toDoList.service.AdminService;
 import pl.hycom.training.toDoList.service.ToDoListService;
+
+import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -19,10 +23,12 @@ public class ToDoListRestController {
     @Autowired
     ToDoListService toDoListService;
 
+    @Autowired
+    AdminService adminService;
 
     @RequestMapping(value="/rest/GetTasks", method = GET)
-    public ResponseEntity getTasks(){
-        return ResponseEntity.ok(toDoListService.getAllTasks());
+    public List<Task> getTasks(){
+        return toDoListService.getAllTasks();
     }
 
     @RequestMapping(value="/rest/AddTask", params = {"description", "finishDate"}, method = POST)

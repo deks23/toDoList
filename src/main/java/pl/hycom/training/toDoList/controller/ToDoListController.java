@@ -103,6 +103,10 @@ public class ToDoListController {
         return "login";
     }
 
+    @RequestMapping(value = "/indexRest", method = RequestMethod.GET)
+    public String restIndex(){
+        return "/indexRest";
+    }
 
 
 }

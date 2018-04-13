@@ -1,5 +1,7 @@
 package pl.hycom.training.toDoList.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,7 @@ public class User {
 
     private Long id;
     private String username;
+    @JsonIgnore
     private String password;
     private String passwordConfirm;
     private Set<Role> roles;
@@ -54,6 +57,7 @@ public class User {
         this.passwordConfirm = passwordConfirm;
     }
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "user_role" , joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     public Set<Role> getRoles() {
@@ -64,13 +68,5 @@ public class User {
         this.roles = roles;
     }
 
-/*    @OneToMany
-    @JoinTable(name = "task")
-    public List<Task> getTask() {
-        return task;
-    }
 
-    public void setTask(List<Task> task) {
-        this.task = task;
-    }*/
 }
