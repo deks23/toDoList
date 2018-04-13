@@ -72,16 +72,11 @@ public class ToDoListController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
         userValidator.validate(userForm, bindingResult);
-
         if (bindingResult.hasErrors()) {
             return "redirect:/register";
         }
         Set<Role> roles = new HashSet<>();
-
-        /*roles.add(userService.findRoleById(1));
-        userForm.setRoles(roles);*/
         userService.save(userForm);
-        //securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
         return "redirect:/login";
     }
 

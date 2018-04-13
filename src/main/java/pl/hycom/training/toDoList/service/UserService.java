@@ -10,5 +10,7 @@ public interface UserService {
     void save(User user);
     User findByUsername(String username);
     Role findRoleById(int id);
+    String restLogin(String username, String password);
+    String parseJWT(String jwt);
 
 }
