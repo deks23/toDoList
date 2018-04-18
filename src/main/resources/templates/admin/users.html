@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <link rel="stylesheet" type="text/css" href="../css/ToDoStyle.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="buttons">
+        <form th:action="@{/admin/users}" method="get">
+            <input class="button btn btn-danger" type="submit" value="Użytkownicy"/>
+        </form>
+        <form th:action="@{/}" method="get">
+            <input class="button btn btn-danger" type="submit" value="Twoje zadania"/>
+        </form>
+        <form th:action="@{/admin}" method="get">
+            <input class="button btn btn-danger" type="submit" value="Zadania użytkowników"/>
+        </form>
+        <form th:action="@{/logout}" method="post">
+            <input class="button btn btn-danger" type="submit" value="Wyloguj się"/>
+        </form>
+    </div>
+    <div class="jumbotron">
+        <h1>Lista zadań - panel admina</h1>
+    </div>
+</div>
+
+
+<div class="container">
+    <div>
+        <form class="form-group " action="/admin/addUser" method="post" enctype="text/html">
+            <h2>Nazwa użytkownika</h2>
+            <input class="form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="username">
+            <h2>hasło</h2>
+            <input class="form-control mb-2 mr-sm-2 mb-sm-0" type="password" name="password">
+            <h2>Rola</h2>
+            <input type="checkbox" name="authorities" value="ADMIN">Admin<br>
+            <input type="checkbox" name="authorities" value="USER" checked="checked">User<br>
+            <input class="styl btn btn-primary" type="submit" value="Dodaj">
+        </form>
+    </div>
+    <div class="tasksContainer span6">
+        <table class="table table-striped customTable">
+            <thead>
+            <tr>
+                <th scope="col1"> Użytkownik</th>
+                <th scope="col2"> Role</th>
+                <th scope="col3"> Role</th>
+                <th scope="col4"> Zatwierdź</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if=${model.users} th:each="user : ${model.users}">
+                <th th:text="${user.username} "></th>
+                <th>
+                    <span th:each="role : ${user.roles}" th:text="${role.name} + ' '"> </span>
+                </th>
+                <th>
+                    <form action="/admin/save" method="POST" enctype="text/html">
+                        <input type="hidden" th:value="${user.id}" name="id">
+                        <input type="checkbox" name = "userAuth" value="ADMIN" > Admin
+                        <input type="checkbox" name = "userAuth" value="USER">  User
+                        <input class="btn btn-danger" type="submit" value="Zapisz">
+                    </form>
+                </th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

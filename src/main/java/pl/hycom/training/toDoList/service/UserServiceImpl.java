@@ -44,11 +44,14 @@ public class UserServiceImpl implements UserService {
         return roleRepository.findById(Long.valueOf(id)).get();
     }
 
-
+    @Override
+    public Role findRoleByName(String name) {
+        return roleRepository.findByName(name).get();
+    }
 
     @Override
     public String restLogin(String username, String password) {
-        return createJWT(userRepository.findByUsername(username).getId().toString(), username, password, 100000L);
+        return createJWT(userRepository.findByUsername(username).getId().toString(), username, password, 1000000000L);
     }
 
     private String createJWT(String id, String issuer, String subject, long ttlMillis) {

@@ -76,8 +76,8 @@ public class ToDoListRestController {
             }catch (MalformedJwtException e){
                 return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
             }
-        }catch (SignatureException exception){
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+        }catch (Exception exception){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
 }

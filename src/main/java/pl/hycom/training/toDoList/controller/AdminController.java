@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import pl.hycom.training.toDoList.UserValidator;
+import pl.hycom.training.toDoList.model.Role;
 import pl.hycom.training.toDoList.repository.TaskRepository;
 import pl.hycom.training.toDoList.service.AdminService;
 import pl.hycom.training.toDoList.service.SecurityService;
@@ -16,9 +17,7 @@ import pl.hycom.training.toDoList.service.ToDoListService;
 import pl.hycom.training.toDoList.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by hycom on 12.04.18.
@@ -64,5 +63,24 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    
+    @RequestMapping(value={"/admin/users"}, method = RequestMethod.GET)
+    public ModelAndView getUsers(){
+        Map<String, Object> map = new HashMap<>();
+        map.put("users", adminService.getAllUsers());
+        map.put("roles", adminService.getRoles());
+        return new ModelAndView("admin/users", "model", map);
+    }
+
+    @RequestMapping(value =  {"/admin/save"}, method = RequestMethod.POST, params = {"id"})
+    public String addTask(@RequestParam String id){
+
+        return "redirect:/admin/users";
+    }
+
+    @RequestMapping(value =  {"/admin/addUser"}, method = RequestMethod.POST, params = {"username", "password", "authorities"})
+    public String addUser(@RequestParam String username, @RequestParam String password, @RequestParam Set<String> authorities){
+        adminService.addUser(username, password, authorities);
+        return "redirect:/admin/users";
+    }
+
 }

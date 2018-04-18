@@ -31,11 +31,25 @@ padding:20px;
 }
 
 .formDiv{
-display: flex;
-justify-content: center;
-align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .formField{
-padding:5px;
+    padding:5px;
+}
+
+.button{
+    margin: 5px;
+}
+
+
+.buttons{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }

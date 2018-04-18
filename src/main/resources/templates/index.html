@@ -12,11 +12,14 @@
 <body>
 
 <div class="container">
+
+    <div class = "buttons">
+        <form th:action="@{/logout}" method="post">
+            <input class="button btn btn-danger" type="submit" value="Wyloguj się"/>
+        </form>
+    </div>
     <div class="jumbotron">
         <h1>Lista zadań</h1>
-        <form th:action="@{/logout}" method="post">
-            <input class="btn btn-danger" type="submit" value="Wyloguj się"/>
-        </form>
     </div>
 </div>
 
@@ -25,9 +28,9 @@
     <div>
         <form class="form-group " action="/add" method="post" enctype="text/html">
             <h2>Zadanie</h2>
-            <input class=" styl form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="description">
+            <input class="form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="description">
             <h2>Data wykonania</h2>
-            <input class="styl form-control mb-2 mr-sm-2 mb-sm-0" type="date" name="date">
+            <input class="form-control mb-2 mr-sm-2 mb-sm-0" type="date" name="date">
             <input class="styl btn btn-primary" type="submit" value="Dodaj">
         </form>
     </div>

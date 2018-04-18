@@ -9,25 +9,33 @@
 <body>
 
 <div class="container">
-    <div class="jumbotron">
-        <h1>Lista zadań - panel admina</h1>
-        <form th:action="@{/logout}" method="post">
-            <input class="btn btn-danger" type="submit" value="Wyloguj się"/>
+    <div class = "buttons">
+        <form th:action="@{/admin/users}" method="get">
+            <input class="button btn btn-danger" type="submit" value="Użytkownicy"/>
         </form>
         <form th:action="@{/}" method="get">
-            <input class="btn btn-danger" type="submit" value="Twoje zadania"/>
+            <input class="button btn btn-danger" type="submit" value="Twoje zadania"/>
         </form>
+        <form th:action="@{/logout}" method="post">
+            <input class="button btn btn-danger" type="submit" value="Wyloguj się"/>
+        </form>
+    </div>
+    <div class="jumbotron">
+
+        <h1>Lista zadań - panel admina</h1>
+
     </div>
 </div>
 <div class="container">
     <div>
         <form class="form-group " action="/admin/addTask" method="post" enctype="text/html">
             <h2>Zadanie</h2>
-            <input class=" styl form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="description">
+            <input class="form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="description">
             <h2>Data wykonania</h2>
-            <input class="styl form-control mb-2 mr-sm-2 mb-sm-0" type="date" name="finishDate">
+            <input class="form-control mb-2 mr-sm-2 mb-sm-0" type="date" name="finishDate">
+            <h2>Użytkownik</h2>
             <select th:if=${model.users} class="form-control  mb-2 mr-sm-2 mb-sm-0" name="username">
-                <option class = "mb-2 mr-sm-2 mb-sm-0" th:text="${user.username}" th:each="user : ${model.users}" th:value="${user.username}">Volvo
+                <option class = "mb-2 mr-sm-2 mb-sm-0" th:text="${user.username}" th:each="user : ${model.users}" th:value="${user.username}">User
                 </option>
             </select>
             <input class="styl btn btn-primary" type="submit" value="Dodaj">
