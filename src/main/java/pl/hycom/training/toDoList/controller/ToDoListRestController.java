@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.resource.HttpResource;
+import pl.hycom.training.toDoList.exceptions.PasswordInvalidException;
 import pl.hycom.training.toDoList.model.Task;
 import pl.hycom.training.toDoList.model.User;
 import pl.hycom.training.toDoList.service.AdminService;
@@ -65,13 +66,19 @@ public class ToDoListRestController {
 
     @RequestMapping(value="/rest/login", params={"username", "password"}, method = POST)
     public ResponseEntity login (@RequestParam String username, @RequestParam String password){
-        return ResponseEntity.ok(userService.restLogin(password, password));
+
+        try {
+            return ResponseEntity.ok(userService.restLogin(username, password));
+        } catch (PasswordInvalidException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
 
     @RequestMapping(value="/rest/check", params={"token"}, method = POST)
     public ResponseEntity check (@RequestParam String token){
         try{
             try {
+                String  str = userService.parseJWT(token);
                 return ResponseEntity.ok(userService.parseJWT(token));
             }catch (MalformedJwtException e){
                 return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
@@ -80,4 +87,6 @@ public class ToDoListRestController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
+
+
 }

@@ -4,6 +4,7 @@ package pl.hycom.training.toDoList.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.hycom.training.toDoList.exceptions.PasswordInvalidException;
 import pl.hycom.training.toDoList.model.Role;
 import pl.hycom.training.toDoList.model.User;
 import pl.hycom.training.toDoList.repository.RoleRepository;
@@ -50,11 +51,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String restLogin(String username, String password) {
+    public String restLogin(String username, String password) throws PasswordInvalidException {
         return createJWT(userRepository.findByUsername(username).getId().toString(), username, password, 1000000000L);
     }
 
-    private String createJWT(String id, String issuer, String subject, long ttlMillis) {
+    private String createJWT(String id, String issuer, String password, long ttlMillis)  throws PasswordInvalidException{
+
+        User user = userRepository.findByUsername(issuer);
+        if(!bCryptPasswordEncoder.matches(password, user.getPassword()))
+            throw new PasswordInvalidException();
 
         //The JWT signature algorithm we will be using to sign the token
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
@@ -69,7 +74,6 @@ public class UserServiceImpl implements UserService {
         //Let's set the JWT Claims
         JwtBuilder builder = Jwts.builder().setId(id)
                 .setIssuedAt(now)
-                .setSubject(subject)
                 .setIssuer(issuer)
                 .signWith(signatureAlgorithm, signingKey);
 
