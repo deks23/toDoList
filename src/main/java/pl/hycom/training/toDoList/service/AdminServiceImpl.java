@@ -77,9 +77,13 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void saveUser(String id, Set<String> authorities) {
-      //  userRepository.findById(Long.valueOf(id)).get().setRoles(convertAuthorities(authorities));
-        for(Role role : convertAuthorities(authorities))
-            userRepository.setRoles(Long.valueOf(id), role);
+       /* userRepository.findById(Long.valueOf(id)).get().setRoles(convertAuthorities(authorities));
+        for(Role role : conv(authorities))
+            userRepository.setRoles(Long.valueOf(id), convertAuthorities(authorities));
+*/
+        User user = userRepository.findById(Long.valueOf(id)).get();
+        user.setRoles(convertAuthorities(authorities));
+        userRepository.save(user);
     }
 
    Set<Role> convertAuthorities (Set<String> authoritiesToConvert){
@@ -89,4 +93,12 @@ public class AdminServiceImpl implements AdminService {
        }
        return roles;
    }
+
+    Set<Role> conv (Set<String> authoritiesToConvert){
+        Set<Role> roles = new HashSet<>();
+        for (String authority : authoritiesToConvert){
+            roles.add(roleRepository.findByName(authority).get());
+        }
+        return roles;
+    }
 }

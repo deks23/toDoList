@@ -11,8 +11,8 @@
 
 <body>
 
-<div class="container">
 
+<div class="container">
     <div class = "buttons">
         <form th:action="@{/logout}" method="post">
             <input class="button btn btn-danger" type="submit" value="Wyloguj się"/>
@@ -23,8 +23,8 @@
     </div>
 </div>
 
-<div class="container">
 
+<div class="container">
     <div>
         <form class="form-group " action="/add" method="post" enctype="text/html">
             <h2>Zadanie</h2>
@@ -42,6 +42,7 @@
             <tr>
                 <th scope="col1"> Zadanie</th>
                 <th scope="col2"> Data końcowa</th>
+                <th scope="col3"> Usuń task</th>
             </tr>
             </thead>
             <tbody>
@@ -57,10 +58,9 @@
             </tr>
             </tbody>
         </table>
-
     </div>
+
 
 </div>
 </body>
-
 </html>

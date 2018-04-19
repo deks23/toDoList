@@ -3,6 +3,8 @@ package pl.hycom.training.toDoList.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import pl.hycom.training.toDoList.UserValidator;
 import pl.hycom.training.toDoList.model.Role;
+import pl.hycom.training.toDoList.model.Task;
 import pl.hycom.training.toDoList.model.User;
 import pl.hycom.training.toDoList.service.SecurityService;
 import pl.hycom.training.toDoList.service.ToDoListService;
@@ -25,8 +28,7 @@ import pl.hycom.training.toDoList.service.UserService;
 
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by hycom on 03.04.18.
