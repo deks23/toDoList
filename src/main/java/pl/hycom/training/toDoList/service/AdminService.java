@@ -17,4 +17,5 @@ public interface AdminService {
     void addTask(String username, String description, String finishDate);
     List<Role> getRoles();
     void addUser(String username, String password, Set<String> authorities);
+    void saveUser(String id, Set<String>authorities);
 }

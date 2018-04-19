@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import pl.hycom.training.toDoList.UserValidator;
 import pl.hycom.training.toDoList.model.Role;
+import pl.hycom.training.toDoList.repository.RoleRepository;
 import pl.hycom.training.toDoList.repository.TaskRepository;
 import pl.hycom.training.toDoList.service.AdminService;
 import pl.hycom.training.toDoList.service.SecurityService;
@@ -41,6 +42,8 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private RoleRepository roleRepository;
 
     @RequestMapping(value = { "/admin"}, method = RequestMethod.GET)
     public ModelAndView welcome() {
@@ -68,12 +71,13 @@ public class AdminController {
         Map<String, Object> map = new HashMap<>();
         map.put("users", adminService.getAllUsers());
         map.put("roles", adminService.getRoles());
+      //  adminService.getRoles().contains(roleRepository.findByName())
         return new ModelAndView("admin/users", "model", map);
     }
 
-    @RequestMapping(value =  {"/admin/save"}, method = RequestMethod.POST, params = {"id"})
-    public String addTask(@RequestParam String id){
-
+    @RequestMapping(value =  {"/admin/save"}, method = RequestMethod.POST, params = {"id", "authorities"})
+    public String addTask(@RequestParam String id, @RequestParam Set<String> authorities){
+        adminService.saveUser(id, authorities);
         return "redirect:/admin/users";
     }
 

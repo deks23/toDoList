@@ -13,12 +13,12 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 import io.jsonwebtoken.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
+    String SECRET = "PASSWORD";
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
         Date now = new Date(nowMillis);
 
         //We will sign our JWT with our ApiKey secret
-        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary("PASSWORD");
+        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(SECRET);
         Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
         //Let's set the JWT Claims
@@ -88,12 +88,12 @@ public class UserServiceImpl implements UserService {
         return builder.compact();
     }
 
-    public String parseJWT(String jwt) {
-
-        //This line will throw an exception if it is not a signed JWS (as expected)
+    public Claims parseJWT(String jwt) {
         Claims claims = Jwts.parser()
-                .setSigningKey(DatatypeConverter.parseBase64Binary("PASSWORD"))
+                .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET))
                 .parseClaimsJws(jwt).getBody();
-        return claims.toString();
+        return claims;
     }
+
+
 }

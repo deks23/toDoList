@@ -48,7 +48,6 @@
                 <th scope="col1"> Użytkownik</th>
                 <th scope="col2"> Role</th>
                 <th scope="col3"> Role</th>
-                <th scope="col4"> Zatwierdź</th>
             </tr>
             </thead>
             <tbody>
@@ -60,8 +59,7 @@
                 <th>
                     <form action="/admin/save" method="POST" enctype="text/html">
                         <input type="hidden" th:value="${user.id}" name="id">
-                        <input type="checkbox" name = "userAuth" value="ADMIN" > Admin
-                        <input type="checkbox" name = "userAuth" value="USER">  User
+                        <input type="checkbox" th:each="role : ${model.roles}" name = "authorities" th:value="${role.name}" th:text="${role.name}" th:checked="${#lists.contains(user.roles, role) ? 'true' : 'false' }">
                         <input class="btn btn-danger" type="submit" value="Zapisz">
                     </form>
                 </th>

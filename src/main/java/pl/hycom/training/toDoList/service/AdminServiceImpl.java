@@ -68,14 +68,25 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void addUser(String username, String password, Set<String> authorities) {
-        Set<Role> roles = new HashSet<>();
-        for (String authority : authorities){
-            roles.add(userService.findRoleByName(authority));
-        }
         User user = new User();
         user.setUsername(username);
         user.setPassword(bCryptPasswordEncoder.encode(password));
-        user.setRoles(roles);
+        user.setRoles(convertAuthorities(authorities));
         userRepository.save(user);
     }
+
+    @Override
+    public void saveUser(String id, Set<String> authorities) {
+      //  userRepository.findById(Long.valueOf(id)).get().setRoles(convertAuthorities(authorities));
+        for(Role role : convertAuthorities(authorities))
+            userRepository.setRoles(Long.valueOf(id), role);
+    }
+
+   Set<Role> convertAuthorities (Set<String> authoritiesToConvert){
+       Set<Role> roles = new HashSet<>();
+       for (String authority : authoritiesToConvert){
+           roles.add(userService.findRoleByName(authority));
+       }
+       return roles;
+   }
 }

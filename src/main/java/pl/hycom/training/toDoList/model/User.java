@@ -20,7 +20,7 @@ public class User {
     private String password;
     private String passwordConfirm;
     private Set<Role> roles;
-    /*private List <Task> task = new ArrayList<>();*/
+
 
     @Id
     @GeneratedValue
@@ -64,6 +64,8 @@ public class User {
         return roles;
     }
 
+    @ManyToMany
+    @JoinTable(name = "user_role" , joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }

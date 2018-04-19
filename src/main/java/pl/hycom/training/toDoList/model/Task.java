@@ -1,5 +1,7 @@
 package pl.hycom.training.toDoList.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -23,6 +25,7 @@ public class Task {
 
 
     @ManyToOne
+    @JsonIgnore
     private User user;
 
     public LocalDate getFinishDate() {
