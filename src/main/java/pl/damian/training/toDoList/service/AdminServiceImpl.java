@@ -15,9 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by hycom on 12.04.18.
- */
+
 @Service
 public class AdminServiceImpl implements AdminService {
     @Autowired

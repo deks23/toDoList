@@ -6,9 +6,7 @@ import pl.damian.training.toDoList.model.User;
 import pl.damian.training.toDoList.model.Role;
 
 
-/**
- * Created by hycom on 11.04.18.
- */
+
 public interface UserService {
     void save(User user);
     User findByUsername(String username);

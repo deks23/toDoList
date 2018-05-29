@@ -12,9 +12,7 @@ import pl.damian.training.toDoList.model.Task;
 import java.time.LocalDate;
 import java.util.*;
 
-/**
- * Created by hycom on 09.04.18.
- */
+
 @Service
 public class ToDoListService {
     @Autowired

@@ -7,9 +7,7 @@ import pl.damian.training.toDoList.model.Task;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by hycom on 12.04.18.
- */
+
 public interface AdminService {
     List<User> getAllUsers();
     List<Task> getAllTasks();
